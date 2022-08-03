@@ -1,9 +1,19 @@
 import { TypeWrapper } from "./TypeWrapper";
 
-export type EventMessage = { id: string; value: any };
+export type EventMessage = {
+  file: string;
+  line: string;
+  codeString: string;
+  codeValue: any;
+};
 
 function isEventMessage(event): event is EventMessage {
-  if ("id" in event && "value" in event) {
+  if (
+    "file" in event &&
+    "line" in event &&
+    "codeString" in event &&
+    "codeValue" in event
+  ) {
     return true;
   } else {
     console.log("❌ unexpected event type: ", { event });
@@ -32,12 +42,12 @@ export class TypeInspector {
   add(event: EventMessage) {
     console.log("Adding event:", event);
 
-    const old = this.calls.find((e) => e.id === event.id);
+    const old = this.calls.find((e) => e.id === event.codeString);
 
     if (old) {
       // console.log("Found old one:", old);
 
-      old.addValue(event.value);
+      old.addValue(event.codeValue);
     } else {
       this.calls.push(new TypeWrapper(event));
     }

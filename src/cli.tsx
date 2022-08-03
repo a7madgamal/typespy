@@ -5,15 +5,15 @@ import { init } from "./server";
 const typeInspector = init();
 
 const App = () => {
-  const [typesList, setTypesList] = useState<{ id: string; type: string }[]>(
-    []
-  );
+  const [typesList, setTypesList] = useState<
+    { id: string; type: string; path: string }[]
+  >([]);
 
   useEffect(() => {
     typeInspector.injectOnUpdateListener((calls) => {
       setTypesList(
         calls.map((c) => {
-          return { type: c.currentType, id: c.id };
+          return { type: c.currentType, id: c.id, path: c.path };
         })
       );
     });
@@ -21,7 +21,13 @@ const App = () => {
 
   const list = typesList.map((type) => (
     <Text color="green" key={type.id}>
-      {type.id} has type {type.type}
+      {type.id}
+      <Text color="gray"> has type </Text>
+      <Text color="blue">{type.type}</Text>
+      <Text color="gray">
+        {" "}
+        {" >> "} {type.path}
+      </Text>
     </Text>
   ));
 

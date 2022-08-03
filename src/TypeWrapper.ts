@@ -1,4 +1,5 @@
 import { EventMessage } from "./TypeInspector";
+import notifier from "node-notifier";
 
 const typeExtractor = (value: unknown) => {
   switch (typeof value) {
@@ -26,9 +27,11 @@ export class TypeWrapper {
   id: string;
   values: any[];
   currentType: string;
+  path: string;
   constructor(event: EventMessage) {
-    this.id = event.id;
-    this.values = [event.value];
+    this.id = event.codeString;
+    this.path = event.file;
+    this.values = [event.codeValue];
     this.currentType = "";
   }
 
@@ -52,11 +55,16 @@ export class TypeWrapper {
     const types: string[] = [];
 
     for (const value of this.values) {
-      types.push(typeExtractor(value));
+      const type = typeExtractor(value);
+
+      if (!types.includes(type)) {
+        types.push(type);
+      }
     }
 
     const result = types.join(" | ");
 
     this.currentType = result;
+    notifier.notify(`${this.id}: ${result}`);
   }
 }

@@ -1,16 +1,18 @@
 import template from "@babel/template";
 import { PluginObj } from "@babel/core";
 
-const buildShortcodeFunction = (id: string, value: string) => {
+const buildShortcodeFunction = (file: string, line: string, code: string) => {
   return template.ast(
-    `window.dt("${id}","${value}");
+    `
+window.dt("${file}","${line}","${code}",${code});
 `
   );
 };
 
-module.exports = ({ types: t }): PluginObj => {
+module.exports = (babel): PluginObj => {
+  babel.cache(true);
+
   return {
-    name: "typedetector",
     visitor: {
       Program(path, state) {
         path.traverse({
@@ -21,23 +23,12 @@ module.exports = ({ types: t }): PluginObj => {
               const prevComment = leadingCommentsList.at(-1);
 
               if (prevComment?.value.includes(" dt ")) {
-                let file = state.file.opts.filename;
-                const location = `${file}:${path.node.loc?.start.line}`;
+                const file = state.file.opts.filename || "UNKNOWN";
+                const line = `${path.node.loc?.start.line || "??"}`;
 
-                const passedIdentText = prevComment.value.split(" ")[2];
-                const node = buildShortcodeFunction(location, passedIdentText);
-                // const callExp = t.callExpression(
-                //   t.memberExpression(t.identifier('window'), t.identifier('dt')),
-                //   [
-                //     {
-                //       type: 'StringLiteral',
-                //       location,
-                //     },
-                //     t.identifier(passedIdentText),
-                //   ],
-                // );
+                const code = prevComment.value.split(" ")[2];
+                const node = buildShortcodeFunction(file, line, code);
 
-                // const expStatement = t.expressionStatement(callExp);
                 path.insertBefore(node);
               }
             }
