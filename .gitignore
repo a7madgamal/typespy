@@ -1,8 +1,1 @@
-dist/index.js
-dist/index.js.map
-dist/server.js
-dist/server.js.map
-dist/TypeInspector.js
-dist/TypeInspector.js.map
-dist/TypeWrapper.js
-dist/TypeWrapper.js.map
+dist/
