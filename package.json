@@ -9,7 +9,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc && babel babel/tests/in.ts --out-file babel/tests/out.ts && chmod +x dist/cli.js",
+    "build": "tsc && chmod +x dist/cli.js",
     "prepare": "npm run build",
     "start": "npm build && node dist/cli/cli.js"
   },
