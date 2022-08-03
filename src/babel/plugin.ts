@@ -9,7 +9,7 @@ window.dt("${file}","${line}","${code}",${code});
   );
 };
 
-module.exports = (babel): PluginObj => {
+export default (babel): PluginObj => {
   babel.cache(true);
 
   return {
