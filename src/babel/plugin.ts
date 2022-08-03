@@ -9,7 +9,7 @@ window.dt("${file}","${line}","${code}",${code});
   );
 };
 
-const Plugin = (babel): PluginObj => {
+module.exports = (babel): PluginObj => {
   babel.cache(true);
 
   return {
@@ -38,5 +38,3 @@ const Plugin = (babel): PluginObj => {
     },
   };
 };
-
-export default Plugin;
