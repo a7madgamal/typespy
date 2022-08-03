@@ -16,7 +16,8 @@ function isEventMessage(event): event is EventMessage {
   ) {
     return true;
   } else {
-    console.log("❌ unexpected event type: ", { event });
+    console.warn("❌ unexpected event type: ", { event });
+    return true;
   }
 }
 
