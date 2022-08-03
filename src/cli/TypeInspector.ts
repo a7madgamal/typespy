@@ -30,7 +30,7 @@ export class TypeInspector {
 
   onPostHandler(request, response) {
     const event = request.body;
-    // console.log(" > TypeInspector: post /value", { event });
+
     if (isEventMessage(event)) {
       this.add(event);
     } else {
@@ -40,8 +40,6 @@ export class TypeInspector {
   }
 
   add(event: EventMessage) {
-    console.log("Adding event:", event);
-
     const old = this.calls.find((e) => e.id === event.codeString);
 
     if (old) {

@@ -25,7 +25,6 @@ const App = () => {
       <Text color="gray"> has type </Text>
       <Text color="blue">{type.type}</Text>
       <Text color="gray">
-        {" "}
         {" >> "} {type.path}
       </Text>
     </Text>

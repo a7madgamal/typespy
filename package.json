@@ -2,20 +2,20 @@
   "name": "type-inspector",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "license": "MIT",
-  "bin": "dist/cli.js",
+  "bin": "dist/cli/cli.js",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc && chmod +x dist/cli.js",
-    "start": "npm run build:babel && npm run build && node dist/cli.js",
-    "build:babel": "tsc babel/plugin.ts && cd babel && babel tests/in.ts --out-file tests/out.ts"
+    "build": "tsc && babel babel/tests/in.ts --out-file babel/tests/out.ts && chmod +x dist/cli.js",
+    "prepare": "npm run build",
+    "start": "npm build && node dist/cli/cli.js"
   },
   "author": "Ahmed Hassanein",
   "files": [
-    "dist/cli.js"
+    "dist"
   ],
   "dependencies": {
     "@babel/cli": "^7.18.10",

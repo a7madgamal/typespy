@@ -26,3 +26,5 @@ class omg {
     /* dt only_comment */
   }
 }
+
+export {};
