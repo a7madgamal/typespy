@@ -8,14 +8,14 @@ const typeInspector = init();
 
 const App = () => {
   const [typesList, setTypesList] = useState<
-    { id: string; type: string; path: string }[]
+    { id: string; type: string; path: string; line: string }[]
   >([]);
 
   useEffect(() => {
     typeInspector.injectOnUpdateListener((calls) => {
       setTypesList(
         calls.map((c) => {
-          return { type: c.currentType, id: c.id, path: c.path };
+          return { type: c.currentType, id: c.id, path: c.path, line: c.line };
         })
       );
     });
@@ -27,7 +27,8 @@ const App = () => {
       <Text color="gray"> has type </Text>
       <Text color="blue">{type.type}</Text>
       <Text color="gray">
-        {" >> "} {type.path}
+        {" >> "}
+        {`${type.path}:${type.path}`}
       </Text>
     </Text>
   ));

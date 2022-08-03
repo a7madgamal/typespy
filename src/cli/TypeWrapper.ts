@@ -28,24 +28,26 @@ export class TypeWrapper {
   values: any[];
   currentType: string;
   path: string;
+  line: string;
   constructor(event: EventMessage) {
     this.id = event.codeString;
     this.path = event.file;
+    this.path = event.line;
     this.values = [event.codeValue];
     this.currentType = "";
   }
 
   addValue(value) {
-    console.log(
-      `TypeWrapper: add another runtime value for id ${this.id}:`,
-      value
-    );
+    // console.log(
+    //   `TypeWrapper: add another runtime value for id ${this.id}:`,
+    //   value
+    // );
 
     if (!this.values.includes(value)) {
       this.values.push(value);
       this.generateType();
     } else {
-      console.log("skipping duplicated value");
+      // console.log("skipping duplicated value");
     }
   }
 
@@ -65,6 +67,6 @@ export class TypeWrapper {
     const result = types.join(" | ");
 
     this.currentType = result;
-    notifier.notify(`${this.id}: ${result}`);
+    notifier.notify(`${this.id}:${result}`);
   }
 }
