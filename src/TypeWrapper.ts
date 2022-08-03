@@ -25,9 +25,11 @@ const typeExtractor = (value: unknown) => {
 export class TypeWrapper {
   id: string;
   values: any[];
+  currentType: string;
   constructor(event: EventMessage) {
     this.id = event.id;
     this.values = [event.value];
+    this.currentType = "";
   }
 
   addValue(value) {
@@ -36,12 +38,16 @@ export class TypeWrapper {
       value
     );
 
-    this.values.push(value);
-    this.printType();
+    if (!this.values.includes(value)) {
+      this.values.push(value);
+      this.generateType();
+    } else {
+      console.log("skipping duplicated value");
+    }
   }
 
-  printType() {
-    console.log(`TypeWrapper: printType for id:${this.id}:`);
+  generateType() {
+    // console.log(`TypeWrapper: generateType for id:${this.id}:`);
 
     const types: string[] = [];
 
@@ -51,6 +57,6 @@ export class TypeWrapper {
 
     const result = types.join(" | ");
 
-    return result;
+    this.currentType = result;
   }
 }
