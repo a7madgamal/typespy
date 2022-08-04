@@ -45,8 +45,6 @@ export class TypeInspector {
     );
 
     if (old) {
-      console.log("Found old one:", old);
-
       old.addValue(event.codeValue);
     } else {
       this.calls.push(new TypeWrapper(event));

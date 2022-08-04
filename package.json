@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc && chmod +x dist/cli/cli.js",
     "prepare": "npm run build",
+    "test": "npm run build && cp dist/babel/plugin.js src/babel/plugin.js && cd src/babel && babel tests/in.ts --out-file tests/out.ts ",
     "start": "npm run build && node dist/cli/cli.js"
   },
   "author": "Ahmed Hassanein",

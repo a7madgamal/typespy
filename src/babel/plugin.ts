@@ -17,19 +17,50 @@ export default (babel): PluginObj => {
       Program(path, state) {
         path.traverse({
           enter(path) {
-            const leadingCommentsList = path.node.leadingComments || [];
+            const leadingComments = path.node.leadingComments || [];
+            const innerComments = path.node.innerComments || [];
+            const trailingComments = path.node.trailingComments || [];
 
-            if (leadingCommentsList.length > 0) {
-              const prevComment = leadingCommentsList.at(-1);
+            const file = state.file.opts.filename || "UNKNOWN";
 
-              if (prevComment?.value.includes(" dt ")) {
-                const file = state.file.opts.filename || "UNKNOWN";
-                const line = `${path.node.loc?.start.line || "??"}`;
+            if (leadingComments.length > 0) {
+              for (const comment of leadingComments) {
+                if (comment?.value.includes(" dt ")) {
+                  const line = `${comment.loc?.start.line || "??"}`;
 
-                const code = prevComment.value.split(" ")[2];
-                const node = buildShortcodeFunction(file, line, code);
+                  const code = comment.value.split(" ")[2];
+                  const fnCode = buildShortcodeFunction(file, line, code);
 
-                path.insertBefore(node);
+                  path.insertBefore(fnCode);
+                }
+              }
+            }
+
+            if (trailingComments.length > 0) {
+              for (const comment of trailingComments) {
+                if (comment?.value.includes(" dt ")) {
+                  const line = `${comment.loc?.start.line || "??"}`;
+                  const code = comment.value.split(" ")[2];
+                  const fnCode = buildShortcodeFunction(file, line, code);
+                  path.insertBefore(fnCode);
+                }
+              }
+            }
+
+            if (innerComments.length > 0) {
+              for (const comment of innerComments) {
+                if (comment?.value.includes(" dt ")) {
+                  const line = `${comment.loc?.start.line || "??"}`;
+
+                  const code = comment.value.split(" ")[2];
+                  const fnCode = buildShortcodeFunction(file, line, code);
+
+                  const node = path.node;
+
+                  if (node.type === "BlockStatement") {
+                    node.body.unshift(fnCode as any);
+                  }
+                }
               }
             }
           },

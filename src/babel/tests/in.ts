@@ -19,12 +19,36 @@ class omg {
     code;
   }
 
-  method() {
-    // dt only_comment
-  }
   method2() {
+    // dt code_after
+    code_after;
+  }
+
+  method2d() {
+    /* dt code_after_star */
+    code_after;
+  }
+
+  method3() {
+    code_before;
+    // dt code_before
+  }
+
+  method4() {
+    // dt no_code
+  }
+
+  method25() {
     /* dt only_comment */
+  }
+
+  method36() {
+    // dt line1
+    // dt line2
+    // dt line3
   }
 }
 
 export {};
+
+// dt last
