@@ -1,39 +1,18 @@
 import { EventMessage } from "./TypeInspector";
 import notifier from "node-notifier";
-
-const typeExtractor = (value: unknown) => {
-  switch (typeof value) {
-    case "boolean":
-      return "boolean";
-    case "number":
-      return "number";
-    case "string":
-      return `string | '${value}'`;
-    case "object":
-      if (value === null) {
-        return "null";
-      }
-      return JSON.stringify(value);
-    case "function":
-      return `function [${value.name}]`;
-    case "undefined":
-      return "undefined";
-    default:
-      throw new Error("Unknown type");
-  }
-};
+import { typeExtractor } from "../helpers/helpers";
 
 export class TypeWrapper {
   id: string;
-  values: any[];
+  values: { key: number; value: any }[];
   currentType: string;
-  path: string;
+  file: string;
   line: string;
   constructor(event: EventMessage) {
     this.id = event.codeString;
-    this.path = event.file;
-    this.path = event.line;
-    this.values = [event.codeValue];
+    this.file = event.file;
+    this.line = event.line;
+    this.values = [{ key: 0, value: event.codeValue }];
     this.currentType = "";
   }
 
@@ -42,13 +21,11 @@ export class TypeWrapper {
     //   `TypeWrapper: add another runtime value for id ${this.id}:`,
     //   value
     // );
+    const key = this.values.length;
 
-    if (!this.values.includes(value)) {
-      this.values.push(value);
-      this.generateType();
-    } else {
-      // console.log("skipping duplicated value");
-    }
+    this.values.push({ key, value });
+    this.generateType();
+    notifier.notify(`Got new value for ${this.id}: ${value}`);
   }
 
   generateType() {
@@ -57,7 +34,7 @@ export class TypeWrapper {
     const types: string[] = [];
 
     for (const value of this.values) {
-      const type = typeExtractor(value);
+      const type = typeExtractor(value.value);
 
       if (!types.includes(type)) {
         types.push(type);
@@ -67,6 +44,5 @@ export class TypeWrapper {
     const result = types.join(" | ");
 
     this.currentType = result;
-    notifier.notify(`${this.id}:${result}`);
   }
 }

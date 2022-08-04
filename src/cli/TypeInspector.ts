@@ -26,7 +26,6 @@ export class TypeInspector {
   onUpdateListener: (calls: TypeWrapper[]) => void;
   constructor() {
     this.calls = [];
-    this.onUpdateListener = () => {};
   }
 
   onPostHandler(request, response) {
@@ -41,10 +40,12 @@ export class TypeInspector {
   }
 
   add(event: EventMessage) {
-    const old = this.calls.find((e) => e.id === event.codeString);
+    const old = this.calls.find(
+      (e) => e.id === event.codeString && e.file === event.file
+    );
 
     if (old) {
-      // console.log("Found old one:", old);
+      console.log("Found old one:", old);
 
       old.addValue(event.codeValue);
     } else {
@@ -55,6 +56,13 @@ export class TypeInspector {
       call.generateType();
     }
 
+    this.onUpdateListener(this.calls);
+  }
+
+  reset() {
+    console.log("resetting TI");
+
+    this.calls = [];
     this.onUpdateListener(this.calls);
   }
 
