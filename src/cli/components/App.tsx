@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Box } from "ink";
+import { Text, Box, Newline } from "ink";
 import { init } from "../server";
 import Gradient from "ink-gradient";
 import BigText from "ink-big-text";
@@ -21,7 +21,7 @@ export const App = () => {
   return (
     <>
       <Gradient name="summer">
-        <BigText text="types inspector" align="center" font="chrome" />
+        <BigText text="typespy" align="center" font="chrome" />
       </Gradient>
       <Box
         borderStyle="bold"
@@ -52,7 +52,16 @@ export const App = () => {
             </Box>
           ))
         ) : (
-          <Text>listening for types...</Text>
+          <Text>
+            I'm spying on your types (･_├┬┴┬┴
+            <Newline />
+            add a{" "}
+            <Text color="gray" italic>
+              {" "}
+              // spy code_here{" "}
+            </Text>
+            comment and restart your application
+          </Text>
         )}
       </Box>
     </>

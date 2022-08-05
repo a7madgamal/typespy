@@ -4,8 +4,9 @@ export function isEventMessage(event): event is EventMessage {
   if (
     "file" in event &&
     "line" in event &&
-    "codeString" in event &&
-    "codeValue" in event
+    "codeString" in event
+    // todo: enable to allow undefined not supported by json
+    // "codeValue" in event
   ) {
     return true;
   } else {
