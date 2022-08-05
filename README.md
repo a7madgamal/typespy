@@ -1,4 +1,4 @@
-# typespy 🕵🏻‍♂️ [beta]
+# typespy 🕵🏻‍♂️
 
 Do you love typescript but hate those `any`s and `unknown`s ?
 
