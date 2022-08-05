@@ -4,10 +4,10 @@ const functions = 3;
 const code = 3;
 
 window._______typespy(
-  "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-  "8",
-  "variable_global",
-  variable_global
+  '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+  '8',
+  'variable_global',
+  variable_global,
 );
 
 const t = 1; // hi1
@@ -16,20 +16,20 @@ const t = 1; // hi1
 // spy variable_global
 
 window._______typespy(
-  "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-  "8",
-  "variable_global",
-  variable_global
+  '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+  '8',
+  'variable_global',
+  variable_global,
 );
 
 hamada();
 
 function test() {
   window._______typespy(
-    "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-    "12",
-    "variable_fn.test.f",
-    variable_fn.test.f
+    '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+    '12',
+    'variable_fn.test.f',
+    variable_fn.test.f,
   );
 
   // spy variable_fn.test.f
@@ -39,10 +39,10 @@ function test() {
 class omg {
   constructor() {
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "18",
-      "omg.variable_constructor",
-      omg.variable_constructor
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '18',
+      'omg.variable_constructor',
+      omg.variable_constructor,
     );
 
     // spy omg.variable_constructor
@@ -51,10 +51,10 @@ class omg {
 
   method2() {
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "23",
-      "code_after",
-      code_after
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '23',
+      'code_after',
+      code_after,
     );
 
     // spy code_after
@@ -63,10 +63,10 @@ class omg {
 
   method2d() {
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "28",
-      "code_after_star",
-      code_after_star
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '28',
+      'code_after_star',
+      code_after_star,
     );
 
     /* spy code_after_star */
@@ -75,10 +75,10 @@ class omg {
 
   method3() {
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "34",
-      "code_before",
-      code_before
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '34',
+      'code_before',
+      code_before,
     );
 
     code_before; // spy code_before
@@ -88,10 +88,10 @@ class omg {
     // spy no_code
 
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "38",
-      "no_code",
-      no_code
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '38',
+      'no_code',
+      no_code,
     );
   }
 
@@ -99,10 +99,10 @@ class omg {
     /* spy no_code_star */
 
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "42",
-      "no_code_star",
-      no_code_star
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '42',
+      'no_code_star',
+      no_code_star,
     );
   }
 
@@ -112,33 +112,33 @@ class omg {
     // spy no_code_3
 
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "48",
-      "no_code_3",
-      no_code_3
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '48',
+      'no_code_3',
+      no_code_3,
     );
 
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "47",
-      "no_code_2",
-      no_code_2
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '47',
+      'no_code_2',
+      no_code_2,
     );
 
     window._______typespy(
-      "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-      "46",
-      "no_code_1",
-      no_code_1
+      '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+      '46',
+      'no_code_1',
+      no_code_1,
     );
   }
 }
 
 window._______typespy(
-  "/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts",
-  "54",
-  "last",
-  last
+  '/Users/ahmedhassanein/personal/typespy/src/babel/tests/in.ts',
+  '54',
+  'last',
+  last,
 );
 
 export {}; // spy last

@@ -1,6 +1,6 @@
-import { EventMessage } from "./ServerHandler";
-import notifier from "node-notifier";
-import { typeExtractor } from "../helpers/helpers";
+import { EventMessage } from './ServerHandler';
+import notifier from 'node-notifier';
+import { typeExtractor } from '../helpers/helpers';
 
 export class TypeWrapper {
   id: string;
@@ -13,7 +13,7 @@ export class TypeWrapper {
     this.file = event.file;
     this.line = event.line;
     this.values = [{ key: 0, value: event.codeValue }];
-    this.currentType = "";
+    this.currentType = '';
   }
 
   addValue(value) {
@@ -35,7 +35,7 @@ export class TypeWrapper {
       }
     }
 
-    const result = types.join(" | ");
+    const result = types.join(' | ');
 
     this.currentType = result;
   }

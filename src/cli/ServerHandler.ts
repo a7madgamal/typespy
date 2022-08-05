@@ -1,5 +1,5 @@
-import { isEventMessage } from "../helpers/typescript";
-import { TypeWrapper } from "./TypeWrapper";
+import { isEventMessage } from '../helpers/typescript';
+import { TypeWrapper } from './TypeWrapper';
 
 export type EventMessage = {
   file: string;
@@ -22,13 +22,13 @@ export class ServerHandler {
       this.add(event);
     } else {
       console.log({ event });
-      throw new Error("Invalid event");
+      throw new Error('Invalid event');
     }
   }
 
   add(event: EventMessage) {
     const old = this.typeWrappers.find(
-      (e) => e.id === event.codeString && e.file === event.file
+      (e) => e.id === event.codeString && e.file === event.file,
     );
 
     if (old) {
@@ -45,7 +45,7 @@ export class ServerHandler {
   }
 
   reset() {
-    console.log("resetting TI");
+    console.log('resetting TI');
 
     this.typeWrappers = [];
     this.onUpdateListener(this.typeWrappers);

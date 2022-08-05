@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Text, Box, Newline } from "ink";
-import { init } from "../server";
-import Gradient from "ink-gradient";
-import BigText from "ink-big-text";
-import { TypeWrapper } from "../TypeWrapper";
-import { valuePrinter } from "../../helpers/helpers";
+import React, { useState, useEffect } from 'react';
+import { Text, Box, Newline } from 'ink';
+import { init } from '../server';
+import Gradient from 'ink-gradient';
+import BigText from 'ink-big-text';
+import { TypeWrapper } from '../TypeWrapper';
+import { valuePrinter } from '../../helpers/helpers';
 
 const typeInspector = init();
 
@@ -55,10 +55,10 @@ export const App = () => {
           <Text>
             I'm spying on your types (･_├┬┴┬┴
             <Newline />
-            add a{" "}
+            add a{' '}
             <Text color="gray" italic>
-              {" "}
-              // spy code_here{" "}
+              {' '}
+              // spy code_here{' '}
             </Text>
             comment and restart your application
           </Text>
