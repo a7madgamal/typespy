@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    [
+      "../../../../dist/babel/plugin.js",
+      { "global": "global", "magicWord": "magicWord", "fnName": "fnName" }
+    ]
+  ]
+}

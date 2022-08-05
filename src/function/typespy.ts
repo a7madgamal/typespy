@@ -1,26 +1,23 @@
+import { DEFAULT_HOST, DEFAULT_PORT_NUM } from '../constants';
 import { EventMessage } from '../cli/ServerHandler';
 
-export async function typespy(
-  file: string,
-  line: string,
-  codeString: string,
-  codeValue,
+export function typespyFactory(
+  host: string = DEFAULT_HOST,
+  port: number = DEFAULT_PORT_NUM,
 ) {
-  try {
-    const message: EventMessage = { file, line, codeString, codeValue };
-
-    // todo: pass url from plugin
-    await fetch('http://10.0.2.2:4444/values', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    });
-  } catch (error) {
-    // @ts-expect-error log
-    console.$log('❌ dt call failed', message);
-    throw error;
-  }
+  return async function typespy(message: EventMessage) {
+    try {
+      await fetch(`http://${host}:${port}/values`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      });
+    } catch (error) {
+      console.log('❌ dt call failed', message);
+      throw error;
+    }
+  };
 }

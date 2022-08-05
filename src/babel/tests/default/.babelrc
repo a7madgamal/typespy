@@ -1,0 +1,3 @@
+{
+  "plugins": [["../../../../dist/babel/plugin.js"]]
+}

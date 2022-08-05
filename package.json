@@ -1,6 +1,6 @@
 {
   "name": "typespy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "license": "MIT",
@@ -12,8 +12,14 @@
     "build": "rm -rf dist || true && tsc && chmod +x dist/cli/cli.js",
     "prepare": "npm run build",
     "prepublish": "npm run test && npm run format && git diff --no-ext-diff --exit-code",
-    "test": "npm run build && cd src/babel && babel tests/in.ts --out-file tests/out.ts ",
+    "test": "npm run build && npm run test:default && npm run test:all && npm run test:fnName && npm run test:global && npm run test:magicWord",
+    "test:default": "babel src/babel/tests/default/in.ts --out-file src/babel/tests/default/out.ts",
+    "test:all": "babel src/babel/tests/all/in.ts --out-file src/babel/tests/all/out.ts",
+    "test:fnName": "babel src/babel/tests/fnName/in.ts --out-file src/babel/tests/fnName/out.ts",
+    "test:global": "babel src/babel/tests/global/in.ts --out-file src/babel/tests/global/out.ts",
+    "test:magicWord": "babel src/babel/tests/magicWord/in.ts --out-file src/babel/tests/magicWord/out.ts",
     "start": "npm run build && node dist/cli/cli.js",
+    "demo": "DEMO_MODE=true node dist/cli/cli.js",
     "format": "prettier --ignore-unknown --write src"
   },
   "author": "Ahmed Hassanein",

@@ -1,4 +1,4 @@
-import { typespy as typespyFunction } from './function/typespy';
-import { typespyFnName } from './constants';
+import { typespyFactory } from './function/typespy';
+import { DEFAULT_FN_NAME, DEFAULT_PORT_NUM } from './constants';
 
-export { typespyFunction, typespyFnName };
+export { typespyFactory, DEFAULT_FN_NAME, DEFAULT_PORT_NUM };

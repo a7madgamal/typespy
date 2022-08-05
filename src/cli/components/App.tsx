@@ -4,15 +4,26 @@ import { init } from '../server';
 import Gradient from 'ink-gradient';
 import BigText from 'ink-big-text';
 import { TypeWrapper } from '../TypeWrapper';
-import { valuePrinter } from '../../helpers/helpers';
+import { runInTestMode, valuePrinter } from '../../helpers/helpers';
+import { DEFAULT_PORT_NUM } from '../../constants';
 
-const typeInspector = init();
+let port = DEFAULT_PORT_NUM;
+
+if (process.env.TYPESPY_PORT_NUM) {
+  port = parseInt(process.env.TYPESPY_PORT_NUM);
+  console.log(`🕵🏻‍♂️ Using non-default port number ${port}`);
+}
+
+const typeInspector = init(port);
 
 export const App = () => {
   const [typesList, setTypesList] = useState<TypeWrapper[]>([]);
 
   useEffect(() => {
-    // runInTestMode(typeInspector)
+    if (process.env.DEMO_MODE) {
+      runInTestMode(typeInspector);
+    }
+
     typeInspector.injectOnUpdateListener((calls) => {
       setTypesList(calls.map((call) => call));
     });
