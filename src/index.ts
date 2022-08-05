@@ -1,3 +1,4 @@
-import { typespy } from "./function/typespy";
-import { FN_NAME } from "./constants";
-export { typespy, FN_NAME };
+import { typespy as typespyFunction } from "./function/typespy";
+import { typespyFnName } from "./constants";
+
+export { typespyFunction, typespyFnName };
