@@ -6,7 +6,7 @@ too lazy to add console logs all over the place to see runtime values?
 
 typespy is a webserver and a babel plugin to make tracking runtime values as easy as adding a single comment.
 
-![main screen](screenshot_main.png)
+![main screen](https://raw.githubusercontent.com/a7madgamal/typespy/master/screenshot_main.png)
 
 ### Installation
 
@@ -16,7 +16,7 @@ typespy is a webserver and a babel plugin to make tracking runtime values as eas
 - Add this code as early to your app
 
   ```typescript
-  import { typespyFactory } from 'typespy';
+  import { typespyFactory, DEFAULT_FN_NAME } from 'typespy';
 
   // or however you check for dev mode!
   if (__DEV__) {
