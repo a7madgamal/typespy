@@ -1,4 +1,4 @@
-import { TypeInspector } from "../cli/TypeInspector";
+import { ServerHandler } from "../cli/ServerHandler";
 
 function sleep(ms: number = 200) {
   return new Promise((resolve) => {
@@ -75,7 +75,7 @@ export const valuePrinter = (value) => {
   }
 };
 
-const runInTestMode = (typeInspector: TypeInspector) => {
+export const runInTestMode = (typeInspector: ServerHandler) => {
   setTimeout(async () => {
     class l0 {}
     class l1 extends l0 {}

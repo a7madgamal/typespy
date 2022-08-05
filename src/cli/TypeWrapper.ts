@@ -1,4 +1,4 @@
-import { EventMessage } from "./TypeInspector";
+import { EventMessage } from "./ServerHandler";
 import notifier from "node-notifier";
 import { typeExtractor } from "../helpers/helpers";
 
@@ -17,10 +17,6 @@ export class TypeWrapper {
   }
 
   addValue(value) {
-    // console.log(
-    //   `TypeWrapper: add another runtime value for id ${this.id}:`,
-    //   value
-    // );
     const key = this.values.length;
 
     this.values.push({ key, value });
@@ -29,8 +25,6 @@ export class TypeWrapper {
   }
 
   generateType() {
-    // console.log(`TypeWrapper: generateType for id:${this.id}:`);
-
     const types: string[] = [];
 
     for (const value of this.values) {

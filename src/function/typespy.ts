@@ -1,4 +1,4 @@
-export async function dt(
+export async function typespy(
   file: string,
   line: string,
   codeString: string,

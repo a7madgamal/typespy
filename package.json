@@ -1,5 +1,5 @@
 {
-  "name": "type-inspector",
+  "name": "typespy",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc && chmod +x dist/cli/cli.js",
     "prepare": "npm run build",
-    "test": "npm run build && cp dist/babel/plugin.js src/babel/plugin.js && cd src/babel && babel tests/in.ts --out-file tests/out.ts ",
+    "test": "npm run build && cd src/babel && babel tests/in.ts --out-file tests/out.ts ",
     "start": "npm run build && node dist/cli/cli.js"
   },
   "author": "Ahmed Hassanein",

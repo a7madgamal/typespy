@@ -1,15 +1,15 @@
 import express from "express";
-import { TypeInspector } from "./TypeInspector";
+import { ServerHandler } from "./ServerHandler";
 
 export const init = () => {
   const router = express.Router();
   const expressApp = express();
 
-  const typeInspector = new TypeInspector();
+  const spy = new ServerHandler();
 
   expressApp.use(express.json());
 
-  router.post("/values", typeInspector.onPostHandler.bind(typeInspector));
+  router.post("/values", spy.onPostHandler.bind(spy));
 
   expressApp.use("/", router);
   expressApp.use(function (req, res) {
@@ -22,5 +22,5 @@ export const init = () => {
     console.log("Started on PORT 4444");
   });
 
-  return typeInspector;
+  return spy;
 };

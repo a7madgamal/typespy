@@ -1,3 +1,4 @@
+import { isEventMessage } from "../helpers/typescript";
 import { TypeWrapper } from "./TypeWrapper";
 
 export type EventMessage = {
@@ -7,25 +8,11 @@ export type EventMessage = {
   codeValue: any;
 };
 
-function isEventMessage(event): event is EventMessage {
-  if (
-    "file" in event &&
-    "line" in event &&
-    "codeString" in event &&
-    "codeValue" in event
-  ) {
-    return true;
-  } else {
-    console.warn("❌ unexpected event type: ", { event });
-    return true;
-  }
-}
-
-export class TypeInspector {
-  calls: TypeWrapper[];
+export class ServerHandler {
+  typeWrappers: TypeWrapper[];
   onUpdateListener: (calls: TypeWrapper[]) => void;
   constructor() {
-    this.calls = [];
+    this.typeWrappers = [];
   }
 
   onPostHandler(request, response) {
@@ -40,31 +27,31 @@ export class TypeInspector {
   }
 
   add(event: EventMessage) {
-    const old = this.calls.find(
+    const old = this.typeWrappers.find(
       (e) => e.id === event.codeString && e.file === event.file
     );
 
     if (old) {
       old.addValue(event.codeValue);
     } else {
-      this.calls.push(new TypeWrapper(event));
+      this.typeWrappers.push(new TypeWrapper(event));
     }
 
-    for (const call of this.calls) {
-      call.generateType();
+    for (const tw of this.typeWrappers) {
+      tw.generateType();
     }
 
-    this.onUpdateListener(this.calls);
+    this.onUpdateListener(this.typeWrappers);
   }
 
   reset() {
     console.log("resetting TI");
 
-    this.calls = [];
-    this.onUpdateListener(this.calls);
+    this.typeWrappers = [];
+    this.onUpdateListener(this.typeWrappers);
   }
 
-  injectOnUpdateListener(listener: (calls: TypeWrapper[]) => void) {
+  injectOnUpdateListener(listener: (typeWrappers: TypeWrapper[]) => void) {
     this.onUpdateListener = listener;
   }
 }
