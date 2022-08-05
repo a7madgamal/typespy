@@ -38,7 +38,7 @@ typespy is a webserver and a babel plugin to make tracking runtime values as eas
 ### Changing defaults
 
 ```typescript
-import { typespyFactory } from 'typespy';
+import { typespyFactory, DEFAULT_FN_NAME } from 'typespy';
 
 // or however you check for dev mode!
 if (__DEV__) {
@@ -53,11 +53,11 @@ if (__DEV__) {
 
 Then you have to define your typespy npm task like this ` "typespy": "TYPESPY_PORT_NUM=1234 typespy"`
 
-You must also pass the same options to the babel plugin like this
+You must also pass the same options to the babel plugin like this:
 
-- `global`: defaults to window, change it if you want to attach the global function somewhere else
-- `magicWord`: defaults to `spy`, change it if you prefer another comment keyword
-- `fnName`: defaults to `_typespy_`
+- `global`: defaults to window, change it if you want to attach the global function somewhere else.
+- `magicWord`: defaults to `spy`, change it if you prefer another comment keyword.
+- `fnName`: defaults to the value of DEFAULT*FN_NAME which is `\_typespy*`.
 
 ```json
 {
