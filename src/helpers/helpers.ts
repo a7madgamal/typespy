@@ -240,5 +240,192 @@ export const runInTestMode = (typeInspector: ServerHandler) => {
       codeString: 'l6',
       codeValue: l6,
     });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
+    await sleep();
+    typeInspector.add({
+      file: '/ahmed/test/deep.js',
+      line: '100',
+      codeString: 'deep',
+      codeValue: {
+        test: {
+          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        },
+      },
+    });
   }, 5000);
 };

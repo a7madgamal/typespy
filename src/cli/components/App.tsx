@@ -30,51 +30,57 @@ export const App = () => {
   }, []);
 
   return (
-    <>
+    <Box borderStyle="bold" flexDirection="column">
       <Gradient name="summer">
         <BigText text="typespy" align="center" font="chrome" />
       </Gradient>
-      <Box
-        borderStyle="bold"
-        flexDirection="column"
-        // height={typesList.length * 30}
-      >
-        {typesList.length ? (
-          typesList.map((type) => (
-            <Box borderStyle="single" key={type.id} flexDirection="column">
-              <Box>
-                <Text>
-                  Code with id [
-                  <Text color="yellow" bold>
-                    {type.id}
-                  </Text>
-                  ] in file
-                  <Text color="blue">{` ${type.file}:${type.line} `}</Text>
-                  has type <Text color="green">{type.currentType}</Text>
+      {typesList.length ? (
+        typesList.map((type) => (
+          <Box borderStyle="single" key={type.id} flexDirection="column">
+            <Box>
+              <Text>
+                Code with id [
+                <Text color="yellow" bold>
+                  {type.id}
                 </Text>
-              </Box>
-              <Box>
-                {type.values.map((value) => (
-                  <Box borderStyle="round" borderColor="gray" key={value.key}>
-                    <Text color="magenta">{valuePrinter(value.value)}</Text>
-                  </Box>
-                ))}
-              </Box>
+                ] in file
+                <Text color="blue">{` ${type.file}:${type.line} `}</Text>
+                has type <Text color="green">{type.currentType}</Text>
+              </Text>
             </Box>
-          ))
-        ) : (
-          <Text>
-            I'm spying on your types (･_├┬┴┬┴
-            <Newline />
-            add a{' '}
-            <Text color="gray" italic>
-              {' '}
-              // spy code_here{' '}
-            </Text>
-            comment and restart your application
+            <Box flexDirection="column">
+              {type.values.map((value) => (
+                <Box
+                  borderStyle="round"
+                  borderColor="gray"
+                  key={value.key}
+
+                  // minWidth={
+                  //   typeof value.value === 'string'
+                  //     ? value.value.length
+                  //     : // value.value.split('\n').sort((value) => value.length)[0]
+                  //       //     .length * 2
+                  //       30
+                  // }
+                >
+                  <Text color="magenta">{valuePrinter(value.value)}</Text>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        ))
+      ) : (
+        <Text>
+          I'm spying on your types (･_├┬┴┬┴
+          <Newline />
+          add a{' '}
+          <Text color="gray" italic>
+            {' '}
+            // spy code_here{' '}
           </Text>
-        )}
-      </Box>
-    </>
+          comment and restart your application
+        </Text>
+      )}
+    </Box>
   );
 };
