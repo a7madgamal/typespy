@@ -10,17 +10,19 @@ const buildShortcodeFunction = (
   line: string,
   code: string,
 ) => {
-  return template.ast(
-    `
-${global}.${fnName}(
-  {
-    file:"${file}",
-    line: "${line}",
-    codeString: "${code}",
-    codeValue: ${code}
-});
-`,
-  );
+  const fncode = `
+  ${global}.${fnName}(
+    {
+      file:"${file}",
+      line: "${line}",
+      codeString: "${code}",
+      codeValue: ${code}
+  });
+  `;
+
+  console.log(`🕵🏻‍♂️ typespy: adding code: ${fncode}`);
+
+  return template.ast(fncode);
 };
 
 export default (babel, opts): PluginObj => {
@@ -93,6 +95,10 @@ export default (babel, opts): PluginObj => {
 
               if (node.type === 'BlockStatement') {
                 node.body.unshift(fnCode as any);
+              } else {
+                console.error(
+                  `🕵🏻‍♂️❌ typespy: unexpected node type ${node.type}`,
+                );
               }
             }
           },
