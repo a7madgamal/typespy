@@ -30,8 +30,20 @@ const getFnTree = (fn: Function) => {
   );
   return tree.filter((t) => t).join(' extends ');
 };
+const stringifyOptions = {
+  indent: '  ',
+  singleQuotes: false,
+  transform: (object, property, originalResult) => {
+    const test = originalResult.split('"');
 
-export const typeExtractor = (value: unknown) => {
+    if (test[0] === '"') test[0] = '';
+    if (test[test.length - 1] === '"') test[test.length - 1] = '';
+
+    return test.join('');
+  },
+};
+
+export const typeExtractor = (value: unknown): string => {
   switch (typeof value) {
     case 'boolean':
       return 'boolean';
@@ -49,7 +61,10 @@ export const typeExtractor = (value: unknown) => {
           typeHolder.push(childType);
         }
 
-        return stringifyObject(typeHolder);
+        const rawResult = stringifyObject(typeHolder, stringifyOptions);
+        const newLineResult = rawResult.replaceAll('\\n', '\n');
+
+        return newLineResult;
       } else {
         const typeHolder = {};
 
@@ -57,12 +72,15 @@ export const typeExtractor = (value: unknown) => {
           if (Object.prototype.hasOwnProperty.call(value, key)) {
             const childValue = value[key];
             const childType = typeExtractor(childValue);
-            console.log('inner object:', key, childType);
+
             typeHolder[key] = childType;
           }
         }
 
-        return stringifyObject(typeHolder);
+        const rawResult = stringifyObject(typeHolder, stringifyOptions);
+        const newLineResult = rawResult.replaceAll('\\n', '\n');
+
+        return newLineResult;
       }
 
     case 'function':
@@ -203,11 +221,11 @@ export const runInTestMode = (typeInspector: ServerHandler) => {
       line: '100',
       codeString: 'basic object',
       codeValue: {
-        null: null,
+        _null: null,
         undef: undefined,
         bool: true,
-        string: 'hi',
-        number: 5,
+        _string: 'hi',
+        _number: 5,
         anonfunction: () => {},
         namefunction: function fnName() {},
       },
@@ -267,140 +285,22 @@ export const runInTestMode = (typeInspector: ServerHandler) => {
       line: '100',
       codeString: 'deep',
       codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
-        },
-      },
-    });
-    await sleep();
-    typeInspector.add({
-      file: '/ahmed/test/deep.js',
-      line: '100',
-      codeString: 'deep',
-      codeValue: {
-        test: {
-          test: { test: { test: { test: { test: { test: { test: {} } } } } } },
+        level1: {
+          level2: {
+            bool: true,
+            cls: l4,
+            arr_diff: [{ test: 1 }, 12, 'string'],
+            arr_num: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            arr_str: ['hi', 'only', 'strings'],
+            arr_cls: [l1, l2, l3, l4],
+            arr_empty: [],
+            level3: {
+              level4: {
+                level5: { level6: { test: { test: {} } } },
+                id: 'value',
+              },
+            },
+          },
         },
       },
     });
