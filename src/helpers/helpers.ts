@@ -1,6 +1,7 @@
 import { ServerHandler } from '../cli/ServerHandler';
+import stringifyObject from 'stringify-object';
 
-function sleep(ms: number = 200) {
+function sleep(ms: number = 250) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
@@ -41,12 +42,32 @@ export const typeExtractor = (value: unknown) => {
     case 'object':
       if (value === null) {
         return 'null';
+      } else if (Array.isArray(value)) {
+        const typeHolder = [];
+        for (const childValue of value) {
+          const childType = typeExtractor(childValue);
+          typeHolder.push(childType);
+        }
+
+        return stringifyObject(typeHolder);
+      } else {
+        const typeHolder = {};
+
+        for (const key in value) {
+          if (Object.prototype.hasOwnProperty.call(value, key)) {
+            const childValue = value[key];
+            const childType = typeExtractor(childValue);
+            console.log('inner object:', key, childType);
+            typeHolder[key] = childType;
+          }
+        }
+
+        return stringifyObject(typeHolder);
       }
-      // todo: implement objects
-      return 'object';
+
     case 'function':
       // todo: extract function shape?
-      return `function [${getFnTree(value)}]`;
+      return `Function [${getFnTree(value)}]`;
     case 'undefined':
       return 'undefined';
     default:
