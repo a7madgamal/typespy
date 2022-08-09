@@ -4,10 +4,9 @@ import { ServerHandler } from './ServerHandler';
 export const init = (port: number) => {
   const router = express.Router();
   const expressApp = express();
-
   const spy = new ServerHandler();
 
-  expressApp.use(express.json());
+  expressApp.use(express.json({ limit: '1mb' }));
 
   router.post('/values', spy.onPostHandler.bind(spy));
 
